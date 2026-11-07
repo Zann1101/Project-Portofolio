@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Project Portofolio - Muhammad Misran</title>
+  <script>
+    document.documentElement.classList.add('js');
+    try { document.documentElement.dataset.bsTheme = localStorage.getItem('tema') || 'dark'; } catch (e) {}
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --grad: linear-gradient(120deg, #1d4ed8, #3b82f6 55%, #38bdf8);
+  --grad-teks: linear-gradient(120deg, #1d4ed8, #3b82f6 60%, #0ea5e9);
+  --c1: #2563eb;
+  --c2: #3b82f6;
+  --c3: #93c5fd;
+  --bs-primary: #3b82f6;
+  --bs-primary-rgb: 59, 130, 246;
+  --bs-body-font-family: 'DM Sans', system-ui, sans-serif;
+  --bs-border-radius: .75rem;
+  --bs-border-radius-lg: 1rem;
+  --bs-border-radius-xl: 1.25rem;
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #0a1020;
+  --bs-body-bg-rgb: 10, 16, 32;
+  --c1: #60a5fa;
+  --grad-teks: linear-gradient(120deg, #60a5fa, #e0f2fe 60%, #ffffff);
+  --kartu: rgba(255, 255, 255, .05);
+  --garis: rgba(255, 255, 255, .1);
+}
+
+[data-bs-theme="light"] {
+  --bs-body-bg: #f4f8fc;
+  --bs-body-bg-rgb: 244, 248, 252;
+  --kartu: #fff;
+  --garis: rgba(10, 16, 32, .1);
+}
+
+html { scroll-padding-top: 80px; }
+
+h1, h2, h3, h4, h5, h6, .navbar-brand, .font-judul {
+  font-family: 'Sora', system-ui, sans-serif;
+}
+
+.seksi { padding-block: 6rem; }
+
+.teks-gradien {
+  background: var(--grad-teks);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.label-seksi {
+  color: var(--c1);
+  font-weight: 600;
+  font-size: .8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: .4rem .9rem;
+  border: 1px solid var(--garis);
+  border-radius: 50rem;
+  background: var(--kartu);
+  font-size: .9rem;
+}
+
+#progres {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--grad);
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 2000;
+}
+
+.navbar { transition: background .3s, box-shadow .3s; }
+.navbar.scrolled {
+  background: rgba(var(--bs-body-bg-rgb), .75);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--garis);
+}
+.navbar .nav-link.active {
+  color: var(--bs-emphasis-color);
+  background: var(--grad) left bottom / 100% 2px no-repeat;
+}
+
+.logo {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--grad);
+  color: #fff;
+  font: 700 .95rem 'Sora', sans-serif;
+}
+
+.ikon-bulat {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--garis);
+  border-radius: 50%;
+  background: var(--kartu);
+  color: inherit;
+  font-size: 1.15rem;
+  transition: transform .25s, background .25s, color .25s;
+}
+.ikon-bulat:hover {
+  transform: translateY(-4px);
+  background: var(--warna, var(--c1));
+  border-color: transparent;
+  color: #fff;
+}
+
+.btn-gradien {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-border-width: 0;
+  background: var(--grad);
+  transition: transform .25s, box-shadow .25s, filter .25s;
+}
+.btn-gradien:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 .6rem 1.4rem rgba(59, 130, 246, .4);
+}
+
+.btn-garis {
+  border: 1px solid var(--garis);
+  background: var(--kartu);
+  color: var(--bs-body-color);
+  transition: transform .25s, border-color .25s;
+}
+.btn-garis:hover, .btn-garis.active {
+  transform: translateY(-2px);
+  border-color: var(--c1);
+  color: var(--bs-body-color);
+}
+.btn-garis.active { background: rgba(59, 130, 246, .15); }
+
+.hero {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle 520px at var(--mx, 70%) var(--my, 30%), rgba(59, 130, 246, .18), transparent 60%),
+    radial-gradient(rgba(var(--bs-body-color-rgb), .09) 1px, transparent 1px) 0 0 / 28px 28px;
+}
+
+.blob {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .3;
+  animation: melayang 12s ease-in-out infinite alternate;
+}
+.blob-1 { top: -120px; left: -100px; background: var(--c2); }
+.blob-2 { bottom: -140px; right: -100px; background: var(--c3); animation-delay: -5s; }
+
+.kursor { animation: kedip 1s steps(1) infinite; color: var(--c1); }
+
+.cincin {
+  position: relative;
+  width: min(320px, 78vw);
+  aspect-ratio: 1;
+}
+.cincin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(#1d4ed8, #3b82f6, #93c5fd, #ffffff, #93c5fd, #3b82f6, #1d4ed8);
+  animation: putar 8s linear infinite;
+}
+.cincin img {
+  position: absolute;
+  inset: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--bs-body-bg);
+}
+
+.chip-melayang {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .5rem .85rem;
+  border: 1px solid var(--garis);
+  border-radius: 50rem;
+  background: var(--kartu);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 .5rem 1.2rem rgba(0, 0, 0, .2);
+  animation: melayang 5s ease-in-out infinite alternate;
+}
+
+.pantul { animation: pantul 1.6s ease-in-out infinite; }
+
+.marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.marquee-isi {
+  width: max-content;
+  animation: geser 30s linear infinite;
+}
+.marquee:hover .marquee-isi { animation-play-state: paused; }
+
+.tile {
+  padding: 1.4rem 1rem;
+  border: 1px solid var(--garis);
+  border-radius: 1rem;
+  background: var(--kartu);
+  text-align: center;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+.tile:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  border-color: var(--c1);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2);
+}
+.tile i {
+  display: block;
+  margin-bottom: .4rem;
+  font-size: 2.4rem;
+  background: var(--grad-teks);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.kartu {
+  border: 1px solid var(--garis) !important;
+  border-radius: 1.25rem;
+  background: var(--kartu);
+  transition: transform .3s, box-shadow .3s;
+}
+.kartu:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, .25);
+}
+.gambar-wrap { position: relative; overflow: hidden; }
+.img-proyek {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  transition: transform .5s;
+}
+.kartu:hover .img-proyek { transform: scale(1.08); }
+
+.sosmed {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--garis);
+  border-radius: 1rem;
+  background: var(--kartu);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.sosmed:hover {
+  transform: translateX(6px);
+  border-color: var(--c1);
+  color: inherit;
+  box-shadow: 0 .6rem 1.4rem rgba(0, 0, 0, .2);
+}
+.sosmed .ikon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--warna);
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.kaca {
+  border: 1px solid var(--garis);
+  border-radius: 1.25rem;
+  background: var(--kartu);
+  backdrop-filter: blur(14px);
+}
+
+.ke-atas {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1030;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  box-shadow: 0 .5rem 1.2rem rgba(0, 0, 0, .3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+}
+.ke-atas.tampil { opacity: 1; pointer-events: auto; }
+.ke-atas:hover { transform: translateY(-3px); }
+.ke-atas svg { position: absolute; inset: 2px; width: 48px; height: 48px; transform: rotate(-90deg); }
+.ke-atas .trek { fill: none; stroke: var(--garis); stroke-width: 3; }
+.ke-atas .isi {
+  fill: none;
+  stroke: var(--c1);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 132;
+  stroke-dashoffset: 132;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+.js .reveal.show { opacity: 1; transform: none; }
+
+@keyframes melayang { to { transform: translateY(-16px); } }
+@keyframes putar { to { transform: rotate(360deg); } }
+@keyframes kedip { 50% { opacity: 0; } }
+@keyframes pantul { 50% { transform: translateY(8px); } }
+@keyframes geser { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+}
+  </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navUtama" data-bs-root-margin="-40% 0px -55% 0px" data-bs-smooth-scroll="true">
+  <div id="progres"></div>
+
+  <nav id="navUtama" class="navbar navbar-expand-lg fixed-top py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#beranda">
+        <span class="logo">M</span>Zann
+      </a>
+
+      <button type="button" class="ikon-bulat tombol-tema ms-auto me-2 d-lg-none" aria-label="Ganti tema"><i class="bi bi-sun-fill"></i></button>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+              data-bs-target="#menuUtama" aria-controls="menuUtama" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="menuUtama" aria-labelledby="judulMenu">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="judulMenu">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+            <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
+            <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
+            <li class="nav-item"><a class="nav-link" href="#proyek">Proyek</a></li>
+            <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+            <li class="nav-item ms-lg-2 d-none d-lg-block">
+              <button type="button" class="ikon-bulat tombol-tema" aria-label="Ganti tema"><i class="bi bi-sun-fill"></i></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header id="beranda" class="hero d-flex align-items-center position-relative overflow-hidden">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="container position-relative py-5 mt-5">
+      <div class="row align-items-center g-5">
+
+        <div class="col-lg-7 order-2 order-lg-1 text-center text-lg-start">
+          <span class="pill"><i class="bi bi-stars me-2 text-primary"></i>Halo, saya</span>
+          <h1 class="display-2 fw-bold mt-3 mb-2">Muhammad <span class="teks-gradien">Misran</span></h1>
+          <p class="fs-3 mb-3">Saya seorang <span id="ketik" class="teks-gradien fw-semibold"></span><span class="kursor">|</span></p>
+          <p class="text-body-secondary fs-5 mb-4 mx-auto mx-lg-0" style="max-width: 36rem;">Saya membangun website yang rapi, responsif, dan mudah dipakai.</p>
+
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start mb-4">
+            <a href="#proyek" class="btn btn-gradien btn-lg px-4">Lihat proyek <i class="bi bi-arrow-right ms-1"></i></a>
+            <a href="#kontak" class="btn btn-garis btn-lg px-4">Hubungi saya</a>
+          </div>
+
+          <div class="d-flex gap-2 justify-content-center justify-content-lg-start">
+            <button type="button" class="ikon-bulat" style="--warna:#5865F2" data-salin="@zann0417" aria-label="Discord"><i class="bi bi-discord"></i></button>
+            <a href="https://www.instagram.com/misraannn?obrf=bWNrNWduMXNnd2R6" target="_blank" rel="noopener" class="ikon-bulat" style="--warna:#dc2743" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/share/19akEsqK6K/" target="_blank" rel="noopener" class="ikon-bulat" style="--warna:#1877F2" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com/@misraannn?si=0aqoj49p7reLkvPg" target="_blank" rel="noopener" class="ikon-bulat" style="--warna:#FF0000" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-5 order-1 order-lg-2 text-center">
+          <div class="position-relative d-inline-block">
+            <div class="cincin"><img src="Gambar/MyPic.png" alt="Foto profil Muhammad Misran"></div>
+            <span class="chip-melayang" style="top: 6%; left: -12%;"><i class="bi bi-filetype-php text-primary"></i>PHP</span>
+            <span class="chip-melayang" style="top: 46%; right: -14%; animation-delay: -2s;"><i class="bi bi-bootstrap-fill" style="color: #93c5fd;"></i>Bootstrap</span>
+            <span class="chip-melayang" style="bottom: 6%; left: -6%; animation-delay: -3.5s;"><i class="bi bi-cpu-fill" style="color: #60a5fa;"></i>Arduino</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4">
+      <a href="#profil" class="pantul d-block text-body-secondary fs-3" aria-label="Gulir ke bawah"><i class="bi bi-chevron-double-down"></i></a>
+    </div>
+  </header>
+
+  <div class="marquee border-top border-bottom py-3 overflow-hidden" style="border-color: var(--garis) !important;">
+    <div class="marquee-isi d-flex gap-5 text-body-secondary fs-5">
+      <span><i class="bi bi-filetype-html me-2"></i>HTML</span>
+      <span><i class="bi bi-filetype-css me-2"></i>CSS</span>
+      <span><i class="bi bi-filetype-js me-2"></i>JavaScript</span>
+      <span><i class="bi bi-filetype-php me-2"></i>PHP</span>
+      <span><i class="bi bi-bootstrap-fill me-2"></i>Bootstrap</span>
+      <span><i class="bi bi-cpu-fill me-2"></i>Arduino</span>
+    </div>
+  </div>
+
+  <section id="profil" class="seksi">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+
+        <div class="col-lg-5 reveal">
+          <p class="label-seksi mb-2">Tentang saya</p>
+          <h2 class="display-6 fw-bold mb-3">Membangun web yang nyaman dipakai</h2>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="pill"><i class="bi bi-mortarboard me-2 text-primary"></i>Teknik Informatika</span>
+            <span class="pill"><i class="bi bi-building me-2 text-primary"></i>Universitas Sulawesi Barat</span>
+          </div>
+          <p class="text-body-secondary mb-4">Saya suka membuat tampilan web yang nyaman dipakai di semua ukuran layar. Saat ini saya belajar HTML, CSS, JavaScript, dan Bootstrap 5.</p>
+
+          <div class="row g-3 mb-4 text-center">
+            <div class="col-6"><div class="kaca py-3"><div class="display-6 fw-bold font-judul teks-gradien"><span data-hitung="3">0</span></div><small class="text-body-secondary">Proyek</small></div></div>
+            <div class="col-6"><div class="kaca py-3"><div class="display-6 fw-bold font-judul teks-gradien"><span data-hitung="6">0</span></div><small class="text-body-secondary">Teknologi</small></div></div>
+          </div>
+
+          <div class="d-flex flex-column flex-sm-row gap-3">
+            <button type="button" class="btn btn-gradien px-4" data-bs-toggle="modal" data-bs-target="#modalProfil">Lihat profil lengkap</button>
+            <button type="button" class="btn btn-garis px-4" data-bs-toggle="modal" data-bs-target="#modalSertifikat">Lihat sertifikat</button>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="row row-cols-2 row-cols-md-3 g-3">
+            <div class="col reveal" style="--d:1"><div class="tile h-100"><i class="bi bi-filetype-html"></i><strong class="d-block">HTML</strong><small class="text-body-secondary">Struktur halaman</small></div></div>
+            <div class="col reveal" style="--d:2"><div class="tile h-100"><i class="bi bi-filetype-css"></i><strong class="d-block">CSS</strong><small class="text-body-secondary">Tampilan dan tata letak</small></div></div>
+            <div class="col reveal" style="--d:3"><div class="tile h-100"><i class="bi bi-filetype-js"></i><strong class="d-block">JavaScript</strong><small class="text-body-secondary">Interaksi web</small></div></div>
+            <div class="col reveal" style="--d:4"><div class="tile h-100"><i class="bi bi-filetype-php"></i><strong class="d-block">PHP</strong><small class="text-body-secondary">Backend sederhana</small></div></div>
+            <div class="col reveal" style="--d:5"><div class="tile h-100"><i class="bi bi-bootstrap-fill"></i><strong class="d-block">Bootstrap</strong><small class="text-body-secondary">Framework UI</small></div></div>
+            <div class="col reveal" style="--d:6"><div class="tile h-100"><i class="bi bi-cpu-fill"></i><strong class="d-block">Arduino</strong><small class="text-body-secondary">Mikrokontroler</small></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="proyek" class="seksi">
+    <div class="container">
+      <div class="text-center mb-4 reveal">
+        <p class="label-seksi mb-2">Portofolio</p>
+        <h2 class="display-6 fw-bold mb-2">Proyek saya</h2>
+        <p class="text-body-secondary mb-0">Tiga proyek yang pernah saya kerjakan.</p>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-5 reveal" id="filter">
+        <button type="button" class="btn btn-garis active" data-filter="semua">Semua</button>
+        <button type="button" class="btn btn-garis" data-filter="web"><i class="bi bi-globe2 me-1"></i>Web</button>
+        <button type="button" class="btn btn-garis" data-filter="iot"><i class="bi bi-cpu me-1"></i>IoT</button>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="gridProyek">
+
+        <div class="col reveal" data-kategori="web" style="--d:1">
+          <article class="card kartu h-100 overflow-hidden">
+            <div class="gambar-wrap">
+              <img src="Gambar/Portal Akademik.png" class="img-proyek" alt="Tampilan Portal Akademik Sederhana">
+              <span class="badge text-bg-dark position-absolute top-0 start-0 m-3">Web</span>
+            </div>
+            <div class="card-body d-flex flex-column p-4">
+              <h3 class="h5 fw-bold">Portal Akademik Sederhana</h3>
+              <p class="text-body-secondary">Latihan dasar HTML dan PHP dengan menu data mahasiswa, beban studi, nilai akhir, pembayaran UKT, dan indeks prestasi semester.</p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="pill py-1"><i class="bi bi-filetype-html me-1"></i>HTML</span>
+                <span class="pill py-1"><i class="bi bi-filetype-php me-1"></i>PHP</span>
+              </div>
+              <button type="button" class="btn btn-gradien mt-auto align-self-start" data-bs-toggle="modal" data-bs-target="#modalProyek"
+                      data-judul="Portal Akademik Sederhana"
+                      data-gambar="Gambar/Portal Akademik.png"
+                      data-teknologi="HTML, PHP"
+                      data-deskripsi="Portal latihan dasar HTML dan PHP untuk kebutuhan akademik. Menyediakan lima menu praktikum: Data Mahasiswa, Beban Studi, Nilai Akhir, Pembayaran UKT, dan Indeks Prestasi Semester.">
+                Lihat detail <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col reveal" data-kategori="web" style="--d:2">
+          <article class="card kartu h-100 overflow-hidden">
+            <div class="gambar-wrap">
+              <img src="Gambar/Project Perpustakaan.png" class="img-proyek" alt="Tampilan Portal Layanan Perpustakaan Kampus">
+              <span class="badge text-bg-dark position-absolute top-0 start-0 m-3">Web</span>
+            </div>
+            <div class="card-body d-flex flex-column p-4">
+              <h3 class="h5 fw-bold">Portal Layanan Perpustakaan Kampus</h3>
+              <p class="text-body-secondary">Portal untuk melihat peraturan peminjaman, mendata anggota, dan menghitung denda keterlambatan pengembalian buku.</p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="pill py-1"><i class="bi bi-filetype-html me-1"></i>HTML</span>
+                <span class="pill py-1"><i class="bi bi-filetype-php me-1"></i>PHP</span>
+              </div>
+              <button type="button" class="btn btn-gradien mt-auto align-self-start" data-bs-toggle="modal" data-bs-target="#modalProyek"
+                      data-judul="Portal Layanan Perpustakaan Kampus"
+                      data-gambar="Gambar/Project Perpustakaan.png"
+                      data-teknologi="HTML, PHP"
+                      data-deskripsi="Portal sederhana untuk melihat peraturan peminjaman, mendata anggota, dan menghitung denda keterlambatan pengembalian buku. Menu layanannya: Data Anggota, Peraturan Peminjaman, Hitung Denda, dan Rekap Peminjaman.">
+                Lihat detail <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col reveal" data-kategori="iot" style="--d:3">
+          <article class="card kartu h-100 overflow-hidden">
+            <div class="gambar-wrap">
+              <img src="Gambar/Project Arduino.png" class="img-proyek object-fit-contain bg-dark" alt="Diagram sistem peringatan dini ketinggian air dengan Arduino">
+              <span class="badge text-bg-dark position-absolute top-0 start-0 m-3">IoT</span>
+            </div>
+            <div class="card-body d-flex flex-column p-4">
+              <h3 class="h5 fw-bold">Sistem Peringatan Dini Ketinggian Air</h3>
+              <p class="text-body-secondary">Prototipe Arduino Uno dengan sensor ultrasonik HC-SR04 untuk mengukur tinggi air. Hasilnya tampil di LCD I2C, lengkap dengan status peringatan lewat LED dan buzzer.</p>
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="pill py-1"><i class="bi bi-cpu-fill me-1"></i>Arduino</span>
+                <span class="pill py-1">HC-SR04</span>
+                <span class="pill py-1">LCD I2C</span>
+              </div>
+              <button type="button" class="btn btn-gradien mt-auto align-self-start" data-bs-toggle="modal" data-bs-target="#modalProyek"
+                      data-judul="Sistem Peringatan Dini Ketinggian Air"
+                      data-gambar="Gambar/Project Arduino.png"
+                      data-teknologi="Arduino Uno, sensor HC-SR04, LCD I2C, LED, buzzer"
+                      data-deskripsi="Sensor ultrasonik HC-SR04 dipasang di atas toples berisi air untuk mengukur jarak ke permukaan air. Arduino Uno mengolah data tersebut, lalu menampilkan tinggi air dan status (misalnya SIAGA) di LCD I2C, serta menyalakan LED hijau/kuning dan buzzer sebagai tanda peringatan.">
+                Lihat detail <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak" class="seksi">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <p class="label-seksi mb-2">Kontak</p>
+        <h2 class="display-6 fw-bold mb-2">Mari terhubung</h2>
+        <p class="text-body-secondary mb-0">Kirim pesan lewat form atau temukan saya di sosial media.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+
+        <div class="col-lg-5 order-2 order-lg-1">
+          <div class="d-grid gap-3 reveal">
+            <button type="button" class="sosmed" style="--warna:#5865F2" data-salin="@zann0417">
+              <span class="ikon"><i class="bi bi-discord"></i></span>
+              <span><strong class="d-block">Discord</strong><small class="text-body-secondary">@zann0417 (klik untuk menyalin)</small></span>
+              <i class="bi bi-copy text-body-secondary ms-auto"></i>
+            </button>
+            <a href="https://www.instagram.com/misraannn?obrf=bWNrNWduMXNnd2R6" target="_blank" rel="noopener" class="sosmed" style="--warna:linear-gradient(45deg,#f09433,#dc2743,#bc1888)">
+              <span class="ikon"><i class="bi bi-instagram"></i></span>
+              <span><strong class="d-block">Instagram</strong><small class="text-body-secondary">@misraannn</small></span>
+              <i class="bi bi-arrow-up-right text-body-secondary ms-auto"></i>
+            </a>
+            <a href="https://www.facebook.com/share/19akEsqK6K/" target="_blank" rel="noopener" class="sosmed" style="--warna:#1877F2">
+              <span class="ikon"><i class="bi bi-facebook"></i></span>
+              <span><strong class="d-block">Facebook</strong><small class="text-body-secondary">Muhammad Misran</small></span>
+              <i class="bi bi-arrow-up-right text-body-secondary ms-auto"></i>
+            </a>
+            <a href="https://youtube.com/@misraannn?si=0aqoj49p7reLkvPg" target="_blank" rel="noopener" class="sosmed" style="--warna:#FF0000">
+              <span class="ikon"><i class="bi bi-youtube"></i></span>
+              <span><strong class="d-block">YouTube</strong><small class="text-body-secondary">@misraannn</small></span>
+              <i class="bi bi-arrow-up-right text-body-secondary ms-auto"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 order-1 order-lg-2 reveal">
+          <div class="kaca p-4">
+            <h3 class="h5 fw-bold mb-3">Hubungi saya</h3>
+            <form id="formKontak" class="needs-validation" novalidate>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="nama" placeholder="Nama" minlength="3" required>
+                <label for="nama">Nama</label>
+                <div class="invalid-feedback">Nama wajib diisi, minimal 3 huruf.</div>
+                <div class="valid-feedback">Nama sudah benar.</div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Email" required>
+                <label for="email">Email</label>
+                <div class="invalid-feedback">Masukkan email yang valid, contoh: nama@email.com.</div>
+                <div class="valid-feedback">Email sudah benar.</div>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea class="form-control" id="pesan" placeholder="Pesan" style="height: 130px;" minlength="10" required></textarea>
+                <label for="pesan">Pesan</label>
+                <div class="invalid-feedback">Pesan wajib diisi, minimal 10 karakter.</div>
+                <div class="valid-feedback">Pesan sudah benar.</div>
+              </div>
+              <button type="submit" class="btn btn-gradien btn-lg w-100">Kirim pesan <i class="bi bi-send ms-1"></i></button>
+              <div id="notifSukses" class="alert alert-success mt-3 mb-0 d-none"><i class="bi bi-check-circle-fill me-2"></i>Pesan terkirim. Terima kasih!</div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center py-4 text-body-secondary" style="border-top: 1px solid var(--garis);">
+    <small>&copy; @2026 Muhammad Misran &bull; Dibuat dengan Bootstrap 5</small>
+  </footer>
+
+  <button type="button" id="keAtas" class="ke-atas" aria-label="Kembali ke atas">
+    <svg viewBox="0 0 48 48"><circle class="trek" cx="24" cy="24" r="21"/><circle class="isi" id="cincinAtas" cx="24" cy="24" r="21"/></svg>
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <div class="toast-container position-fixed bottom-0 start-0 p-3">
+    <div id="toastInfo" class="toast align-items-center border-0 text-bg-dark" role="status" aria-live="polite" data-bs-delay="2200">
+      <div class="d-flex">
+        <div class="toast-body"><i class="bi bi-check-circle-fill text-success me-2"></i><span id="toastIsi"></span></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalProfil" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">Profil Lengkap</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-3">
+            <img src="Gambar/MyPic.png" alt="Foto profil" width="120" height="120" class="rounded-circle object-fit-cover border border-3 border-primary">
+          </div>
+          <dl class="row mb-0">
+            <dt class="col-sm-4">Nama</dt><dd class="col-sm-8">Muhammad Misran</dd>
+            <dt class="col-sm-4">Jurusan</dt><dd class="col-sm-8">Teknik Informatika</dd>
+            <dt class="col-sm-4">Kampus</dt><dd class="col-sm-8">Universitas Sulawesi Barat</dd>
+            <dt class="col-sm-4">Minat</dt><dd class="col-sm-8">Pengembangan web dan Arduino</dd>
+            <dt class="col-sm-4">Keahlian</dt><dd class="col-sm-8">HTML, CSS, JavaScript, Bootstrap 5, PHP</dd>
+          </dl>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-garis" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalSertifikat" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">Sertifikat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body text-center py-5">
+          <i class="bi bi-award display-1 teks-gradien"></i>
+          <h3 class="h5 mt-3">Belum ada sertifikat</h3>
+          <p class="text-body-secondary mb-0">Sertifikat akan ditambahkan di sini setelah saya memilikinya.</p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-garis" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalProyek" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="proyekJudul"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <img id="proyekGambar" src="" class="img-fluid rounded-3 border mb-3" alt="Tampilan proyek">
+          <p id="proyekDeskripsi"></p>
+          <p class="mb-0"><strong>Teknologi:</strong> <span id="proyekTeknologi"></span></p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-garis" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const html = document.documentElement;
+    const kurangGerak = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function toast(teks) {
+      document.getElementById('toastIsi').textContent = teks;
+      bootstrap.Toast.getOrCreateInstance(document.getElementById('toastInfo')).show();
+    }
+
+    function ikonTema() {
+      document.querySelectorAll('.tombol-tema i').forEach(function (i) {
+        i.className = html.dataset.bsTheme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+      });
+    }
+    ikonTema();
+    document.querySelectorAll('.tombol-tema').forEach(function (tombol) {
+      tombol.addEventListener('click', function () {
+        const baru = html.dataset.bsTheme === 'dark' ? 'light' : 'dark';
+        html.dataset.bsTheme = baru;
+        try { localStorage.setItem('tema', baru); } catch (e) {}
+        ikonTema();
+      });
+    });
+
+    const navbar = document.getElementById('navUtama');
+    const progres = document.getElementById('progres');
+    const keAtas = document.getElementById('keAtas');
+    const cincinAtas = document.getElementById('cincinAtas');
+
+    function saatGulir() {
+      const maks = document.documentElement.scrollHeight - window.innerHeight;
+      const p = maks > 0 ? window.scrollY / maks : 0;
+      progres.style.transform = 'scaleX(' + p + ')';
+      cincinAtas.style.strokeDashoffset = 132 * (1 - p);
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      keAtas.classList.toggle('tampil', window.scrollY > 400);
+    }
+    window.addEventListener('scroll', saatGulir, { passive: true });
+    saatGulir();
+    keAtas.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    const hero = document.getElementById('beranda');
+    hero.addEventListener('mousemove', function (e) {
+      const r = hero.getBoundingClientRect();
+      hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+
+    const pengamat = new IntersectionObserver(function (daftar) {
+      daftar.forEach(function (d) {
+        if (d.isIntersecting) { d.target.classList.add('show'); pengamat.unobserve(d.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) { pengamat.observe(el); });
+
+    const penghitung = new IntersectionObserver(function (daftar) {
+      daftar.forEach(function (d) {
+        if (!d.isIntersecting) return;
+        const el = d.target, target = +el.dataset.hitung;
+        let n = 0;
+        const t = setInterval(function () {
+          n++;
+          el.textContent = n;
+          if (n >= target) clearInterval(t);
+        }, 250);
+        penghitung.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-hitung]').forEach(function (el) { penghitung.observe(el); });
+
+    const peran = ['Web Developer', 'Mahasiswa Informatika', 'Pecinta Arduino'];
+    const ketik = document.getElementById('ketik');
+    let iPeran = 0, iHuruf = 0, hapus = false;
+    function ketikLoop() {
+      const kata = peran[iPeran];
+      iHuruf += hapus ? -1 : 1;
+      ketik.textContent = kata.slice(0, iHuruf);
+      let jeda = hapus ? 40 : 90;
+      if (!hapus && iHuruf === kata.length) { hapus = true; jeda = 1400; }
+      else if (hapus && iHuruf === 0) { hapus = false; iPeran = (iPeran + 1) % peran.length; jeda = 400; }
+      setTimeout(ketikLoop, jeda);
+    }
+    if (kurangGerak) { ketik.textContent = peran[0]; } else { ketikLoop(); }
+
+    const isiMarquee = document.querySelector('.marquee-isi');
+    isiMarquee.innerHTML += isiMarquee.innerHTML;
+
+    document.querySelectorAll('#filter button').forEach(function (tombol) {
+      tombol.addEventListener('click', function () {
+        document.querySelectorAll('#filter button').forEach(function (b) { b.classList.remove('active'); });
+        tombol.classList.add('active');
+        document.querySelectorAll('#gridProyek > .col').forEach(function (kartu) {
+          const cocok = tombol.dataset.filter === 'semua' || kartu.dataset.kategori === tombol.dataset.filter;
+          kartu.classList.toggle('d-none', !cocok);
+          if (cocok) {
+            kartu.classList.remove('show');
+            void kartu.offsetWidth;
+            kartu.classList.add('show');
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll('[data-salin]').forEach(function (tombol) {
+      tombol.addEventListener('click', function () {
+        const teks = tombol.dataset.salin;
+        const selesai = function () { toast('Username Discord ' + teks + ' disalin'); };
+        if (navigator.clipboard) { navigator.clipboard.writeText(teks).then(selesai, selesai); } else { selesai(); }
+      });
+    });
+
+    const form = document.getElementById('formKontak');
+    const notif = document.getElementById('notifSukses');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      notif.classList.add('d-none');
+      if (form.checkValidity()) {
+        notif.classList.remove('d-none');
+        form.reset();
+        form.classList.remove('was-validated');
+        toast('Pesan terkirim');
+      } else {
+        form.classList.add('was-validated');
+      }
+    });
+
+    const menu = document.getElementById('menuUtama');
+    document.querySelectorAll('#menuUtama .nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        bootstrap.Offcanvas.getOrCreateInstance(menu).hide();
+      });
+    });
+
+    document.getElementById('modalProyek').addEventListener('show.bs.modal', function (event) {
+      const tombol = event.relatedTarget;
+      document.getElementById('proyekJudul').textContent = tombol.dataset.judul;
+      document.getElementById('proyekGambar').src = tombol.dataset.gambar;
+      document.getElementById('proyekDeskripsi').textContent = tombol.dataset.deskripsi;
+      document.getElementById('proyekTeknologi').textContent = tombol.dataset.teknologi;
+    });
+  </script>
+</body>
+</html>
